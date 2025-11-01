@@ -44,6 +44,8 @@ ORDERS {
     DELIVERY delivery
     string total
     boolean status 
+    VARIANT variant
+    SIZE size
     timestamp createdAt
 }
 
@@ -53,17 +55,24 @@ PAYMENT_METHOD {
     string photos
 }
 
+PRODUCT_IMAGES {
+    int id
+    string photos_one
+    string photos_two
+    string photos_three
+    string photos_four
+    timestamp createdAt
+    timestamp updatedAt
+}
 
 PRODUCT {
     int id
     string name
     string description
-    string photos
+    int id_product_images
     float rating
     float priceOriginal
     float priceDiscount
-    VARIANT variant
-    SIZE size
     boolean flash_sale
     int stock
     timestamp createdAt
@@ -91,8 +100,8 @@ PRODUCT_ORDERS {
     USERS ||--|| ACCOUNT : "create an account"
     CATEGORIES||--o{ PRODUCT_CATEGORIES : ""
 
-    PRODUCT ||--o{SIZE: ""
-    PRODUCT ||--o{VARIANT : ""
+    ORDERS ||--o{SIZE: ""
+    ORDERS ||--o{VARIANT : ""
     PRODUCT ||--o{PRODUCT_CATEGORIES :""
     
     ORDERS ||--||PAYMENT_METHOD:""
@@ -100,6 +109,8 @@ PRODUCT_ORDERS {
 
     ORDERS ||--o{PRODUCT_ORDERS: ""
     PRODUCT ||--o{PRODUCT_ORDERS :""
+
+    PRODUCT_IMAGES |o--|{PRODUCT: ""
 
 
 
