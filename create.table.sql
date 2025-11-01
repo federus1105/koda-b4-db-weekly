@@ -34,6 +34,8 @@ CREATE TABLE orders (
     delivery delivery NOT NULL,
     total FLOAT NOT NULL,
     status BOOLEAN NOT NULL,
+    variant variant,
+    size size,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_account) REFERENCES account(id),
     FOREIGN KEY (id_paymentMethod) REFERENCES payment_method(id)
@@ -49,24 +51,31 @@ CREATE TABLE product_orders (
     id_product INT NOT NULL,
     id_order INT NOT NULL,
     quantity FLOAT NOT NULL,
-    FOREIGN KEY (id_product) REFERENCES product(id)
+    FOREIGN KEY (id_product) REFERENCES product(id),
     FOREIGN KEY (id_order) REFERENCES orders(id)
 );
 
 CREATE TABLE product (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    id_product_images INT NOT NULL,
     description VARCHAR(255) NOT NULL,
-    photos VARCHAR(255) NOT NULL,
     RATING FLOAT NOT NULL,
     priceOriginal FLOAT NOT NULL,
     priceDiscount FLOAT,
     flash_sale BOOLEAN,
-    variant variant NOT NULL,
-    size size NOT NULL,
     stock INT NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(id_product_images) REFERENCES product_images(id)
+);
+
+CREATE TABLE product_images(
+    id SERIAL PRIMARY KEY,
+    photos_one VARCHAR(255) NOT NULL,
+    photos_two VARCHAR(255),
+    photos_three VARCHAR(255),
+    photos_four VARCHAR(255)
 );
 
 CREATE TABLE categories (
@@ -77,6 +86,6 @@ CREATE TABLE categories (
 CREATE TABLE product_categories (
     id_product INT NOT NULL,
     id_categories INT NOT NULL,
-    FOREIGN KEY (id_product) REFERENCES product(id)
+    FOREIGN KEY (id_product) REFERENCES product(id),
     FOREIGN KEY (id_categories) REFERENCES categories(id)
 );
