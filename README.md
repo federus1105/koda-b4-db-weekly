@@ -41,6 +41,7 @@ ORDERS {
     string fullname
     string address
     string phoneNumber
+    quantity FLOAT NOT NULL,
     DELIVERY delivery
     string total
     boolean status 
@@ -92,7 +93,6 @@ PRODUCT_CATEGORIES {
 PRODUCT_ORDERS {
    int id_product
    int id_order
-   int quantity
 }
 
 
