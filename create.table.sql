@@ -7,9 +7,9 @@ CREATE TYPE delivery AS ENUM ('dineIn','doorDelivery', 'pickUp');
 --- TABLE ----
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    email VARCHAR(100),
-    password VARCHAR(100),
-    role role
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    role role NOT NULL
  );
 
 CREATE TABLE account (
@@ -31,6 +31,7 @@ CREATE TABLE orders (
     fullname VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
     phoneNumber VARCHAR(100) NOT NULL,
+    quantity FLOAT NOT NULL,
     delivery delivery NOT NULL,
     total FLOAT NOT NULL,
     status BOOLEAN NOT NULL,
@@ -50,7 +51,6 @@ CREATE TABLE payment_method (
 CREATE TABLE product_orders (
     id_product INT NOT NULL,
     id_order INT NOT NULL,
-    quantity FLOAT NOT NULL,
     FOREIGN KEY (id_product) REFERENCES product(id),
     FOREIGN KEY (id_order) REFERENCES orders(id)
 );
