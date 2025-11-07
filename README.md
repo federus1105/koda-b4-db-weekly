@@ -41,13 +41,13 @@ ORDERS {
     string fullname
     string address
     string phoneNumber
-    quantity FLOAT NOT NULL,
+    quantity
     DELIVERY delivery
     string total
     boolean status 
     VARIANT variant
     SIZE size
-    timestamp createdAt
+    timestamp
 }
 
 PAYMENT_METHOD {
